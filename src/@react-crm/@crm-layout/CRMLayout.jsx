@@ -4,9 +4,6 @@ import {
   Button,
   Tooltip,
   PageHeader,
-  Drawer,
-  Card,
-  Typography,
 } from "antd";
 import { useNavigate } from "react-router-dom";
 import React from "react";
@@ -14,8 +11,6 @@ import routes from "../@routes/routes";
 import {
   SearchOutlined,
   FileAddOutlined,
-  PlusOutlined,
-  DeleteOutlined,
 } from "@ant-design/icons";
 
 const CRMLayout = ({ children }) => {
@@ -47,6 +42,7 @@ const CRMLayout = ({ children }) => {
           mode="inline"
           defaultSelectedKeys={["0"]}
           onSelect={(e) => setCurrentKey(e.key)}
+          className="tw-sticky tw-top-0"
         >
           {routes.map((route, index) => (
             <Menu.Item
@@ -55,6 +51,7 @@ const CRMLayout = ({ children }) => {
                 navigate(route.path);
               }}
               icon={<route.icon />}
+              className="tw-text-sm"
             >
               {route.name}
             </Menu.Item>
@@ -68,7 +65,7 @@ const CRMLayout = ({ children }) => {
         }}
       >
         <PageHeader
-          title={routes[currentKey].name}
+          title="codelift"
           style={{ borderBottom: "1px solid #e8e8e8" }}
           extra={
             <>
@@ -76,6 +73,7 @@ const CRMLayout = ({ children }) => {
                 <Button
                   type="primary"
                   shape="circle"
+                  className="tw-bg-primary"
                   icon={<SearchOutlined />}
                 />
               </Tooltip>
@@ -83,6 +81,7 @@ const CRMLayout = ({ children }) => {
                 <Button
                   type="primary"
                   shape="circle"
+                  className="tw-bg-primary"
                   icon={<FileAddOutlined />}
                   onClick={() => setNotesOpen((prev) => !prev)}
                 />
@@ -92,40 +91,6 @@ const CRMLayout = ({ children }) => {
         />
         <Layout.Content style={{ position: "relative" }}>
           {children}
-          <Drawer
-            title="Notes"
-            placement="right"
-            closable={true}
-            onClose={() => setNotesOpen((prev) => !prev)}
-            visible={notesOpen}
-            getContainer={false}
-            style={{ position: "absolute" }}
-            mask={false}
-            contentWrapperStyle={{
-              boxShadow: "none",
-              borderLeft: "1px solid #e8e8e8",
-            }}
-            extra={
-              <Button
-                type="secondary"
-                shape="circle"
-                icon={<PlusOutlined />}
-                onClick={() => addNote()}
-              />
-            }
-          >
-            {notes.map((note, index) => (
-              <Card
-                actions={[<DeleteOutlined />]}
-                key={index}
-                style={{ marginBottom: "1rem" }}
-              >
-                <Typography.Paragraph editable={{ onChange: () => {} }}>
-                  Write a Note...
-                </Typography.Paragraph>
-              </Card>
-            ))}
-          </Drawer>
         </Layout.Content>
       </Layout>
     </Layout>

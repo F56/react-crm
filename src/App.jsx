@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import CRMLayout from "./@react-crm/@crm-layout/CRMLayout";
 import routes from "./@react-crm/@routes/routes";
+import 'antd/dist/antd.css';
 import './App.css';
 
 const App = () => {
